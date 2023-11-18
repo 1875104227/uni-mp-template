@@ -2,6 +2,7 @@
 //@ts-ignore
 import Guess from '@/components/Guess/Guess'
 import type { InputNumberBoxEvent } from '@/components/vk-data-input-number-box/vk-data-input-number-box'
+import type { GuessInstance } from '@/types/component'
 
 //修改商品数量
 const onChangeCount = (ev: InputNumberBoxEvent) => {
@@ -86,14 +87,21 @@ const gotoPayment = () => {
   // 跳转到结算页
   uni.navigateTo({ url: '/pagesOrder/create/create' })
 }
+
+// 获取猜你喜欢组件实例
+const guessRef = ref<GuessInstance>()
+// 滚动触底事件
+const onScrolltolower = () => {
+  guessRef.value?.getMore()
+}
 </script>
 
 <template>
-  <scroll-view scroll-y class="scroll-view">
+  <scroll-view scroll-y class="scroll-view" @scrolltolower="onScrolltolower">
     <!-- 已登录: 显示购物车 -->
-    <template v-if="true">
+    <template v-if="memberStore.profile">
       <!-- 购物车列表 -->
-      <view class="cart-list" v-if="true">
+      <view class="cart-list" v-if="cartList.length > 0">
         <!-- 优惠提示 -->
         <view class="tips">
           <text class="label">满减</text>
