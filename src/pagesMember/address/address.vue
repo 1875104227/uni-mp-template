@@ -26,6 +26,14 @@ const onDeleteAddress = (id: string) => {
     }
   })
 }
+
+//
+const onChangeAddress = (item: AddressItem) => {
+  //
+  const addressStore = useAddressStore()
+  addressStore.changeSelectedAddress(item)
+  uni.navigateBack()
+}
 </script>
 
 <template>
@@ -36,7 +44,7 @@ const onDeleteAddress = (id: string) => {
         <uni-swipe-action class="address-list">
           <!-- 收货地址项 -->
           <uni-swipe-action-item class="item" v-for="item in addressList" :key="item.id">
-            <view class="item-content">
+            <view class="item-content" @tap="onChangeAddress(item)">
               <view class="user">
                 {{ item.receiver }}
                 <text class="contact">{{ item.contact }}</text>
@@ -52,6 +60,7 @@ const onDeleteAddress = (id: string) => {
                 class="edit"
                 hover-class="none"
                 :url="`/pagesMember/address/address-form?id=${item.id}`"
+                @tap.stop="() => {}"
               >
                 修改
               </navigator>
