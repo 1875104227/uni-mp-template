@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { OrderState, orderStateList } from '@/config/constants'
+import type { GuessInstance } from '@/types/component'
+
 /**
  * 自定义导航栏交互
  */
@@ -153,6 +155,13 @@ const onOrderConfirm = () => {
     }
   })
 }
+
+// 获取猜你喜欢组件实例
+const guessRef = ref<GuessInstance>()
+// 滚动触底事件
+const onScrolltolower = () => {
+  guessRef.value?.getMore()
+}
 </script>
 
 <template>
@@ -164,7 +173,7 @@ const onOrderConfirm = () => {
       <view class="title">订单详情</view>
     </view>
   </view>
-  <scroll-view scroll-y enable-back-to-top class="viewport" id="scroller">
+  <scroll-view scroll-y enable-back-to-top class="viewport" id="scroller" @scrolltolower="onScrolltolower">
     <template v-if="order">
       <!-- 订单状态 -->
       <view class="overview" :style="{ paddingTop: safeAreaInsets!.top + 20 + 'px' }">
