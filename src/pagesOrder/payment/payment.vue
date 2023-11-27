@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import type { GuessInstance } from '@/types/component'
+// import type { GuessInstance } from '@/types/component'
 
 // 获取页面参数
 const query = defineProps<{
   id: string
 }>()
 
-// 获取猜你喜欢组件实例
-const guessRef = ref<GuessInstance>()
-// 滚动触底事件
-const onScrolltolower = () => {
-  guessRef.value?.getMore()
-}
+// // 获取猜你喜欢组件实例
+// const guessRef = ref<GuessInstance>()
+// // 滚动触底事件
+// const onScrolltolower = () => {
+//   guessRef.value?.getMore()
+// }
+
+// 猜你喜欢组合式函数调用
+const { guessRef, onScrolltolower } = useGuessList()
 </script>
 
 <template>

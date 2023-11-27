@@ -2,7 +2,7 @@
 //@ts-ignore
 import Guess from '@/components/Guess/Guess'
 import type { InputNumberBoxEvent } from '@/components/vk-data-input-number-box/vk-data-input-number-box'
-import type { GuessInstance } from '@/types/component'
+// import type { GuessInstance } from '@/types/component'
 
 // 是否适配安全区
 defineProps<{
@@ -100,12 +100,14 @@ const gotoPayment = () => {
   uni.navigateTo({ url: '/pagesOrder/create/create' })
 }
 
-// 获取猜你喜欢组件实例
-const guessRef = ref<GuessInstance>()
-// 滚动触底事件
-const onScrolltolower = () => {
-  guessRef.value?.getMore()
-}
+// // 获取猜你喜欢组件实例
+// const guessRef = ref<GuessInstance>()
+// // 滚动触底事件
+// const onScrolltolower = () => {
+//   guessRef.value?.getMore()
+// }
+// 猜你喜欢组合式函数调用
+const { guessRef, onScrolltolower } = useGuessList()
 </script>
 
 <template>
